@@ -1,6 +1,6 @@
 # Objective Lisp
 
-*An effort to ease syntactic headaches across the Common Lisp standard without starting a new language*
+*An effort to bake CLOS further into CL*
 
 ## Major Goals
 
@@ -27,6 +27,10 @@ It should still be possible for us to call into `cl:` whenever we need to, and `
 
 Where necessary, functions should be renamed in line with the standard CL naming conventions for marking predicates/side-effect functions. So far this includes the functions `null` and `member` being renamed to `nullp` and `memberp`.
 
+###### Argument reordering
+
+Indexing functions for some constructs go `(foo thing index)`, others go `(foo index thing)`, still others go `(foo index thing &optional default)`. We should pick one and standardize on it.
+
 ###### Symbol freeing
 
 Where appropriate, liberate reserved symbols. So far this includes the designated truth symbol `t` (`:ol` exports `true` and `false`, both of which do exactly what you think they do)
@@ -39,7 +43,7 @@ There are some functions and macros missing from the CL standard library that ar
 
 ###### Hyperspec acceptance
 
-By definition, these are additions to the language that I think are worthwhile, but that will likely never make it into the CL spec proper. Hopefully, you'll find them useful too.
+By definition, these are additions or chages to the language that I think are worthwhile, but that will likely never make it into the CL spec proper. Hopefully, you'll find them useful too, but I'm not bothered if you don't.
 
 ###### Language branching
 
