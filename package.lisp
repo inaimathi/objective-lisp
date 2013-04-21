@@ -3,21 +3,25 @@
 (defpackage #:objective-lisp
   (:nicknames #:ol)
   (:use #:cl)
-  (:shadow #:+ #:- #:* #:/ #:<=
+  (:shadow #:+ #:- #:* #:/ #:<= #:>= #:> #:<
            #:member #:null
-           #:= #:string= #:eq #:eql #:equal #:equalp
+           #:= #:string= #:eq #:eql #:equal #:equalp #:/=
            #:length #:map #:mapcar #:concatenate
-	   #:first #:rest #:nth)
-  (:export #:+ #:- #:* #:/ #:<=
+	   #:first #:last #:rest #:nth)
+  (:export #:+ #:- #:* #:/ #:<= #:>= #:> #:<
+	   #:false #:true
            #:memberp #:nullp
-           #:= #:string= #:eq #:eql #:equal #:equalp
+           #:= #:string= #:eq #:eql #:equal #:equalp #:/=
            #:length #:map #:mapcar #:concatenate
-	   #:first #:rest #:nth
+	   #:first #:last #:init #:rest #:nth
 
 	   #:list #:nil
 
 	   ;;; Introspection
 	   #:in-package #:describe #:documentation #:apropos-list #:list-all-packages #:list-all-symbols
+
+	   ;;; General utility
+	   #:with-gensyms
 
 	   ;;; All the defs
 	   #:lambda #:defclass #:defconstant #:defgeneric #:define-compiler-macro 
