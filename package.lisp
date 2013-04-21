@@ -1,3 +1,4 @@
+
 ;;;; package.lisp
 
 (defpackage #:objective-lisp
@@ -12,10 +13,11 @@
 	   #:false #:true
            #:memberp #:nullp
            #:= #:string= #:eq #:eql #:equal #:equalp #:/=
-           #:length #:map #:mapcar #:concatenate
+           #:length #:map #:mapcar #:concatenate #:loop
 	   #:first #:last #:init #:rest #:nth
+	   #:setf
 
-	   #:list #:nil
+	   #:list #:vector #:hash #:nil
 
 	   ;;; Introspection
 	   #:in-package #:describe #:documentation #:apropos-list #:list-all-packages #:list-all-symbols

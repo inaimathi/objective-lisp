@@ -10,3 +10,11 @@
     `(let ((,s ,seq))
        (if (emptyp ,s) ,s
 	   (progn ,@body)))))
+
+(defun list-all-symbols (&optional package)
+  (let ((lst ())
+        (package (find-package package)))
+    (if package
+	(do-symbols (s (find-package package)) (push s lst))
+	(do-all-symbols (s lst) (push s lst)))
+    lst))
