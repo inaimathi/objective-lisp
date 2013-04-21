@@ -32,23 +32,39 @@
 
 (defmethod map ((fn function) (l list) &rest lists)
   (apply #'cl:mapcar fn (cons l lists)))
+(defmethod map ((fn function) (seq array) &rest arrays)
+  (apply #'cl:map 'vector fn seq arrays))
+;;; ODD BEHAVIOR NOTE: (map #'char-code "Hello there") gives type error (the results are ints rather than chars)
+(defmethod map ((fn function) (seq string) &rest strings)
+  (apply #'cl:map 'string fn seq strings))
+;;; hash
 
-(defmethod concatenate ((str string) &rest strings)
-  (apply #'cl:concatenate 'string (cons  str strings)))
+
+(defmethod concatenate ((seq string) &rest strings)
+  (apply #'cl:concatenate 'string (cons seq strings)))
+(defmethod concatenate ((seq cons) &rest conses)
+  (apply #'cl:concatenate 'cons (cons seq conses)))
+(defmethod concatenate ((seq array) &rest arrays)
+  (apply #'cl:concatenate 'vector (cons seq arrays)))
+;;; hash
 
 (defmethod nth ((index integer) (seq cons)) (cl:nth index seq))
 (defmethod nth ((index integer) (seq string)) (aref seq index))
 (defmethod nth ((index integer) (seq array)) (aref seq index))
+;;; hash?
 
 (defmethod first (seq) 
   (unless-empty seq (nth 0 seq)))
+;;; hash?
 
 (defmethod rest (seq) 
   (unless-empty seq (subseq seq 1)))
+;;; hash?
 
 (defmethod init ((seq list)) (cl:butlast seq))
 (defmethod init ((seq string)) (subseq seq 0 (max 0 (- (length seq) 1))))
 (defmethod init ((seq array)) (subseq seq 0 (max 0 (- (length seq) 1))))
+;;; hash?
 
 (defmethod last ((seq list)) (cl:last seq))
 (defmethod last ((seq string))
@@ -59,6 +75,7 @@
   (unless-empty seq
     (let ((len (length seq)))
       (subseq seq (max 0 (- len 1)) len))))
+;;; hash?
 
 ;;;;;;;;;; Comparison primitives
 (defmethod = (a b) false)
